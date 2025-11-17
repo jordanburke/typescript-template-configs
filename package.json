@@ -1,0 +1,71 @@
+{
+  "name": "-template",
+  "version": "6.0.0",
+  "description": "A basic template for creating a TypeScript library and Publishing it to NPM.",
+  "keywords": [
+    "typescript",
+    "template",
+    "tsup",
+    "npm"
+  ],
+  "author": "jordan.burke@gmail.com",
+  "license": "MIT",
+  "homepage": "https://github.com/jordanburke/typescript-library-template",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jordanburke/typescript-library-template"
+  },
+  "scripts": {
+    "validate": "pnpm format && pnpm lint && pnpm test && pnpm build",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "lint": "eslint ./src --fix",
+    "lint:check": "eslint ./src",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "test:ui": "vitest --ui",
+    "build": "rimraf dist && cross-env NODE_ENV=production tsup",
+    "build:watch": "tsup --watch",
+    "dev": "tsup --watch",
+    "prepublishOnly": "pnpm validate",
+    "ts-types": "tsc"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3.3.1",
+    "@eslint/js": "^9.39.1",
+    "@types/node": "^22.19.1",
+    "@typescript-eslint/eslint-plugin": "^8.46.4",
+    "@typescript-eslint/parser": "^8.46.4",
+    "@vitest/coverage-v8": "3.2.4",
+    "@vitest/ui": "^3.2.4",
+    "cross-env": "^10.1.0",
+    "eslint": "^9.39.1",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-prettier": "^5.5.4",
+    "eslint-plugin-simple-import-sort": "^12.1.1",
+    "globals": "^16.5.0",
+    "prettier": "^3.6.2",
+    "rimraf": "^6.1.0",
+    "ts-node": "^10.9.2",
+    "tsup": "^8.5.1",
+    "typescript": "^5.9.3",
+    "vitest": "^3.2.4"
+  },
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "require": "./dist/index.js",
+      "import": "./dist/index.mjs"
+    }
+  },
+  "files": [
+    "lib",
+    "dist"
+  ],
+  "packageManager": "pnpm@10.22.0+sha512.bf049efe995b28f527fd2b41ae0474ce29186f7edcb3bf545087bd61fbbebb2bf75362d1307fda09c2d288e1e499787ac12d4fcb617a974718a6051f2eee741c"
+}
