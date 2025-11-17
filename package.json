@@ -1,71 +1,71 @@
 {
-  "name": "-template",
-  "version": "6.0.0",
-  "description": "A basic template for creating a TypeScript library and Publishing it to NPM.",
+  "name": "typescript-template-configs",
+  "version": "1.0.0",
+  "description": "Shared TypeScript configuration files for library templates. Provides standardized ESLint, Prettier, Vitest, TypeScript, and build configs.",
   "keywords": [
     "typescript",
     "template",
+    "config",
+    "eslint",
+    "prettier",
+    "vitest",
     "tsup",
-    "npm"
+    "shared-config"
   ],
   "author": "jordan.burke@gmail.com",
   "license": "MIT",
-  "homepage": "https://github.com/jordanburke/typescript-library-template",
+  "homepage": "https://github.com/jordanburke/typescript-template-configs",
   "repository": {
     "type": "git",
-    "url": "https://github.com/jordanburke/typescript-library-template"
+    "url": "https://github.com/jordanburke/typescript-template-configs"
   },
-  "scripts": {
-    "validate": "pnpm format && pnpm lint && pnpm test && pnpm build",
-    "format": "prettier --write .",
-    "format:check": "prettier --check .",
-    "lint": "eslint ./src --fix",
-    "lint:check": "eslint ./src",
-    "test": "vitest run",
-    "test:watch": "vitest",
-    "test:coverage": "vitest run --coverage",
-    "test:ui": "vitest --ui",
-    "build": "rimraf dist && cross-env NODE_ENV=production tsup",
-    "build:watch": "tsup --watch",
-    "dev": "tsup --watch",
-    "prepublishOnly": "pnpm validate",
-    "ts-types": "tsc"
-  },
-  "devDependencies": {
-    "@eslint/eslintrc": "^3.3.1",
-    "@eslint/js": "^9.39.1",
-    "@types/node": "^22.19.1",
-    "@typescript-eslint/eslint-plugin": "^8.46.4",
-    "@typescript-eslint/parser": "^8.46.4",
-    "@vitest/coverage-v8": "3.2.4",
-    "@vitest/ui": "^3.2.4",
-    "cross-env": "^10.1.0",
-    "eslint": "^9.39.1",
-    "eslint-config-prettier": "^10.1.8",
-    "eslint-plugin-import": "^2.32.0",
-    "eslint-plugin-prettier": "^5.5.4",
-    "eslint-plugin-simple-import-sort": "^12.1.1",
-    "globals": "^16.5.0",
-    "prettier": "^3.6.2",
-    "rimraf": "^6.1.0",
-    "ts-node": "^10.9.2",
-    "tsup": "^8.5.1",
-    "typescript": "^5.9.3",
-    "vitest": "^3.2.4"
-  },
-  "main": "./dist/index.js",
-  "module": "./dist/index.mjs",
-  "types": "./dist/index.d.ts",
   "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "require": "./dist/index.js",
-      "import": "./dist/index.mjs"
-    }
+    "./prettier": "./.prettierrc",
+    "./prettier-ignore": "./.prettierignore",
+    "./eslint": "./eslint.config.base.mjs",
+    "./vitest": "./vitest.config.base.ts",
+    "./tsconfig": "./tsconfig.base.json",
+    "./tsup": "./tsup.config.base.ts",
+    "./scripts": "./package-scripts.json",
+    "./package.json": "./package.json"
   },
   "files": [
-    "lib",
-    "dist"
+    ".prettierrc",
+    ".prettierignore",
+    "eslint.config.base.mjs",
+    "vitest.config.base.ts",
+    "tsconfig.base.json",
+    "tsup.config.base.ts",
+    "package-scripts.json",
+    "README.md",
+    "LICENSE"
   ],
+  "peerDependencies": {
+    "@eslint/eslintrc": "^3.x",
+    "@eslint/js": "^9.x",
+    "@typescript-eslint/eslint-plugin": "^8.x",
+    "@typescript-eslint/parser": "^8.x",
+    "@vitest/coverage-v8": "^3.x",
+    "cross-env": "^10.x",
+    "eslint": "^9.x",
+    "eslint-config-prettier": "^10.x",
+    "eslint-plugin-import": "^2.x",
+    "eslint-plugin-prettier": "^5.x",
+    "eslint-plugin-simple-import-sort": "^12.x",
+    "globals": "^16.x",
+    "prettier": "^3.x",
+    "rimraf": "^6.x",
+    "tsup": "^8.x",
+    "typescript": "^5.x",
+    "vitest": "^3.x"
+  },
+  "devDependencies": {
+    "@types/node": "^22.19.1",
+    "typescript": "^5.9.3"
+  },
+  "scripts": {
+    "validate": "node scripts/validate.js",
+    "prepublishOnly": "pnpm validate"
+  },
   "packageManager": "pnpm@10.22.0+sha512.bf049efe995b28f527fd2b41ae0474ce29186f7edcb3bf545087bd61fbbebb2bf75362d1307fda09c2d288e1e499787ac12d4fcb617a974718a6051f2eee741c"
 }

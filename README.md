@@ -1,115 +1,249 @@
-## typescript-library-template
+# typescript-template-configs
 
-[![Node.js CI](https://github.com/jordanburke/typescript-library-template/actions/workflows/node.js.yml/badge.svg)](https://github.com/jordanburke/typescript-library-template/actions/workflows/node.js.yml)
-[![CodeQL](https://github.com/jordanburke/typescript-library-template/actions/workflows/codeql.yml/badge.svg)](https://github.com/jordanburke/typescript-library-template/actions/workflows/codeql.yml)
+[![Validate Configs Package](https://github.com/jordanburke/typescript-template-configs/actions/workflows/node.js.yml/badge.svg)](https://github.com/jordanburke/typescript-template-configs/actions/workflows/node.js.yml)
 
-A modern TypeScript library template with standardized build scripts and tooling.
+Shared TypeScript configuration files for library templates. Provides standardized ESLint, Prettier, Vitest, TypeScript, and build configs.
 
-## Features
+## 📦 What's Included
 
-- **Modern Build System**: [tsup](https://tsup.egoist.dev/) for fast bundling with TypeScript support
-- **Testing**: [Vitest](https://vitest.dev/) with coverage reporting and UI
-- **Code Quality**: ESLint + Prettier with automatic formatting and fixing
-- **Dual Format**: Outputs both CommonJS and ES modules with proper TypeScript declarations
-- **Standardized Scripts**: Consistent commands across all projects
+This package provides base configuration files for TypeScript library templates:
 
-## Quick Start
+### Locked Configs (Use As-Is)
+- **`.prettierrc`** - Code formatting rules
+- **`.prettierignore`** - Files to ignore from formatting
 
-1. **Use this template** to create a new repository
-2. **Clone your new repository**
-3. **Install dependencies**: `pnpm install`
-4. **Start developing**: `pnpm dev` (builds with watch mode)
-5. **Before committing**: `pnpm run validate` (format + lint + test + build)
+### Extendable Configs (Can Be Customized)
+- **`eslint.config.base.mjs`** - Base ESLint rules + TypeScript support
+- **`vitest.config.base.ts`** - Vitest test framework configuration
+- **`tsconfig.base.json`** - TypeScript compiler base settings
+- **`tsup.config.base.ts`** - Build configuration for tsup
+- **`package-scripts.json`** - Standardized npm scripts reference
 
-## Development Commands
-
-### Pre-Checkin Command
+## 🚀 Installation
 
 ```bash
-pnpm run validate  # 🚀 Main command: format, lint, test, and build everything
+pnpm add -D typescript-template-configs
+
+# Also install peer dependencies:
+pnpm add -D \
+  eslint prettier typescript vitest tsup \
+  @typescript-eslint/eslint-plugin @typescript-eslint/parser \
+  eslint-config-prettier eslint-plugin-prettier \
+  eslint-plugin-import eslint-plugin-simple-import-sort \
+  @eslint/js @eslint/eslintrc globals \
+  @vitest/coverage-v8 cross-env rimraf
 ```
 
-### Individual Commands
+## 📖 Usage
+
+### Prettier (Locked - Use Exact Copy)
+
+Copy the Prettier config to your project root:
 
 ```bash
-# Formatting
-pnpm format        # Format code with Prettier
-pnpm format:check  # Check formatting without writing
-
-# Linting
-pnpm lint          # Fix ESLint issues
-pnpm lint:check    # Check ESLint issues without fixing
-
-# Testing
-pnpm test          # Run tests once
-pnpm test:watch    # Run tests in watch mode
-pnpm test:coverage # Run tests with coverage report
-pnpm test:ui       # Launch Vitest UI
-
-# Building
-pnpm build         # Production build
-pnpm build:watch   # Build with watch mode
-pnpm dev           # Development mode (alias for build:watch)
-
-# Type Checking
-pnpm ts-types      # Check TypeScript types
+cp node_modules/typescript-template-configs/.prettierrc .
+cp node_modules/typescript-template-configs/.prettierignore .
 ```
 
-## Publishing
+Or reference it in your `package.json`:
 
-The template automatically runs `pnpm run validate` before publishing via the `prepublishOnly` script, ensuring your package is properly formatted, linted, tested, and built.
+```json
+{
+  "prettier": "typescript-template-configs/prettier"
+}
+```
+
+### ESLint (Extendable)
+
+**Basic usage (inherit all base rules):**
+
+```javascript
+// eslint.config.mjs
+import baseConfig from "typescript-template-configs/eslint"
+
+export default [...baseConfig]
+```
+
+**Extended usage (add variant-specific rules):**
+
+```javascript
+// eslint.config.mjs
+import baseConfig from "typescript-template-configs/eslint"
+
+export default [
+  ...baseConfig,
+  {
+    // React-specific rules
+    files: ["**/*.tsx"],
+    rules: {
+      "react/jsx-uses-react": "error",
+      "react-hooks/rules-of-hooks": "error"
+    }
+  }
+]
+```
+
+### Vitest (Extendable)
+
+**Basic usage:**
+
+```typescript
+// vitest.config.ts
+import { defineConfig } from "vitest/config"
+import baseConfig from "typescript-template-configs/vitest"
+
+export default defineConfig(baseConfig)
+```
+
+**Extended usage:**
+
+```typescript
+// vitest.config.ts
+import { defineConfig } from "vitest/config"
+import baseConfig from "typescript-template-configs/vitest"
+
+export default defineConfig({
+  ...baseConfig,
+  test: {
+    ...baseConfig.test,
+    setupFiles: ["./test/setup.ts"] // Add custom setup
+  }
+})
+```
+
+### TypeScript (Extendable)
+
+**Basic usage:**
+
+```json
+{
+  "extends": "typescript-template-configs/tsconfig",
+  "compilerOptions": {
+    "outDir": "./dist"
+  }
+}
+```
+
+**Extended usage:**
+
+```json
+{
+  "extends": "typescript-template-configs/tsconfig",
+  "compilerOptions": {
+    "outDir": "./dist",
+    "jsx": "react-jsx",
+    "lib": ["ES2020", "DOM"]
+  }
+}
+```
+
+### Tsup (Extendable)
+
+**Basic usage:**
+
+```typescript
+// tsup.config.ts
+import baseConfig from "typescript-template-configs/tsup"
+
+export default baseConfig
+```
+
+**Extended usage (customize entry points):**
+
+```typescript
+// tsup.config.ts
+import baseConfig from "typescript-template-configs/tsup"
+import type { Options } from "tsup"
+
+export default {
+  ...baseConfig,
+  entry: ["src/index.ts", "src/cli.ts"] // Multiple entry points
+} satisfies Options
+```
+
+### Package Scripts (Reference Only)
+
+The `package-scripts.json` file contains standardized npm scripts. Copy the relevant scripts to your `package.json`:
+
+```json
+{
+  "scripts": {
+    "validate": "pnpm format && pnpm lint && pnpm test && pnpm build",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "lint": "eslint ./src --fix",
+    "lint:check": "eslint ./src",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "test:ui": "vitest --ui",
+    "build": "rimraf dist && cross-env NODE_ENV=production tsup",
+    "build:watch": "tsup --watch",
+    "dev": "tsup --watch",
+    "prepublishOnly": "pnpm validate",
+    "ts-types": "tsc"
+  }
+}
+```
+
+## 🔄 Update Workflow
+
+When configs are updated in this package, update your template:
 
 ```bash
-pnpm publish --access public
+# Update to latest version
+pnpm update typescript-template-configs
+
+# Re-copy locked files (Prettier)
+cp node_modules/typescript-template-configs/.prettierrc .
+cp node_modules/typescript-template-configs/.prettierignore .
+
+# Test that everything still works
+pnpm validate
 ```
 
-## Project Structure
+## 🎯 Design Philosophy
 
-```
-src/
-├── index.ts          # Main library entry point
-test/
-├── *.spec.ts         # Test files
-dist/                 # Built output (CommonJS + ES modules + types)
-```
+### Locked vs Extendable
 
-## Tooling
+**Locked files** ensure consistency across all templates:
+- **Prettier** - Code formatting should be identical everywhere
+- Prevents formatting debates and merge conflicts
 
-- **Build**: [tsup](https://tsup.egoist.dev/) - Fast TypeScript bundler
-- **Test**: [Vitest](https://vitest.dev/) - Fast unit test framework
-- **Lint**: [ESLint](https://eslint.org/) with TypeScript support
-- **Format**: [Prettier](https://prettier.io/) with ESLint integration
-- **Package Manager**: [pnpm](https://pnpm.io/) for fast, efficient installs
+**Extendable files** allow variant-specific customization:
+- **ESLint** - Different variants need different rules (React, Node.js, etc.)
+- **Vitest** - Some variants need custom test setup
+- **TypeScript** - Browser vs Node targets, JSX support, etc.
+- **Build configs** - Different entry points, output formats
 
-## Claude Code Skill
+### Semantic Versioning
 
-This repository includes a Claude Code skill to help you apply these standards to other projects:
+This package follows semver:
+- **Patch** (1.0.x) - Bug fixes in configs
+- **Minor** (1.x.0) - New configs added, backward compatible
+- **Major** (x.0.0) - Breaking changes to existing configs
 
-**Location**: `.claude/skills/typescript-standards/`
+## 📚 Available Template Variants
 
-**Usage**: When using Claude Code, the skill automatically provides guidance for:
+Templates using these configs:
+- **[typescript-library-template](https://github.com/jordanburke/typescript-library-template)** - Base template (tsup)
+- **typescript-library-template-vite** - Vite-based variant (coming soon)
+- **typescript-library-template-react** - React library variant (coming soon)
 
-- Creating new libraries from this template
-- Applying these standards to existing TypeScript projects
-- Configuring tooling (tsup, Vitest, ESLint, Prettier)
-- Setting up dual module format
+## 🤝 Contributing
 
-**Installation** (for use in other projects):
+Found a bug or want to improve the configs?
 
-```bash
-# Copy the skill to your Claude Code skills directory
-cp -r .claude/skills/typescript-standards ~/.claude/skills/
+1. Fork this repository
+2. Make your changes
+3. Test in a template project
+4. Submit a PR with explanation
 
-# Or if using plugins/marketplace
-# See .claude-plugin/marketplace.json for distribution configuration
-```
+## 📄 License
 
-**References**:
+MIT © Jordan Burke
 
-- [CLAUDE.md](./CLAUDE.md) - Development guidance for this project
-- [STANDARDIZATION_GUIDE.md](./STANDARDIZATION_GUIDE.md) - Guide for applying these patterns to existing projects
-- [.claude/skills/typescript-standards/](./. claude/skills/typescript-standards/) - Complete skill documentation
+## 🔗 Related
 
----
-
-_This template is based on the earlier work of https://github.com/orabazu/tsup-library-template but updated with modern tooling and standardized scripts._
+- [STANDARDIZATION_GUIDE.md](./STANDARDIZATION_GUIDE.md) - How to apply this pattern
+- [package-scripts.json](./package-scripts.json) - Script reference documentation
