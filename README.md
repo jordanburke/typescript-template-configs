@@ -9,10 +9,12 @@ Shared TypeScript configuration files for library templates. Provides standardiz
 This package provides base configuration files for TypeScript library templates:
 
 ### Locked Configs (Use As-Is)
+
 - **`.prettierrc`** - Code formatting rules
 - **`.prettierignore`** - Files to ignore from formatting
 
 ### Extendable Configs (Can Be Customized)
+
 - **`eslint.config.base.mjs`** - Base ESLint rules + TypeScript support
 - **`vitest.config.base.ts`** - Vitest test framework configuration
 - **`tsconfig.base.json`** - TypeScript compiler base settings
@@ -77,9 +79,9 @@ export default [
     files: ["**/*.tsx"],
     rules: {
       "react/jsx-uses-react": "error",
-      "react-hooks/rules-of-hooks": "error"
-    }
-  }
+      "react-hooks/rules-of-hooks": "error",
+    },
+  },
 ]
 ```
 
@@ -106,8 +108,8 @@ export default defineConfig({
   ...baseConfig,
   test: {
     ...baseConfig.test,
-    setupFiles: ["./test/setup.ts"] // Add custom setup
-  }
+    setupFiles: ["./test/setup.ts"], // Add custom setup
+  },
 })
 ```
 
@@ -157,7 +159,7 @@ import type { Options } from "tsup"
 
 export default {
   ...baseConfig,
-  entry: ["src/index.ts", "src/cli.ts"] // Multiple entry points
+  entry: ["src/index.ts", "src/cli.ts"], // Multiple entry points
 } satisfies Options
 ```
 
@@ -207,10 +209,12 @@ pnpm validate
 ### Locked vs Extendable
 
 **Locked files** ensure consistency across all templates:
+
 - **Prettier** - Code formatting should be identical everywhere
 - Prevents formatting debates and merge conflicts
 
 **Extendable files** allow variant-specific customization:
+
 - **ESLint** - Different variants need different rules (React, Node.js, etc.)
 - **Vitest** - Some variants need custom test setup
 - **TypeScript** - Browser vs Node targets, JSX support, etc.
@@ -219,6 +223,7 @@ pnpm validate
 ### Semantic Versioning
 
 This package follows semver:
+
 - **Patch** (1.0.x) - Bug fixes in configs
 - **Minor** (1.x.0) - New configs added, backward compatible
 - **Major** (x.0.0) - Breaking changes to existing configs
@@ -226,6 +231,7 @@ This package follows semver:
 ## 📚 Available Template Variants
 
 Templates using these configs:
+
 - **[typescript-library-template](https://github.com/jordanburke/typescript-library-template)** - Base template (tsup)
 - **typescript-library-template-vite** - Vite-based variant (coming soon)
 - **typescript-library-template-react** - React library variant (coming soon)
