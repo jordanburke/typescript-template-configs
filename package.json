@@ -20,13 +20,13 @@
     "type": "git",
     "url": "https://github.com/jordanburke/typescript-template-configs"
   },
-  "main": "./prettier-config.js",
+  "main": "./prettier-config.cjs",
   "bin": {
     "typescript-template-configs": "./bin/init.js"
   },
   "exports": {
-    ".": "./prettier-config.js",
-    "./prettier": "./prettier-config.js",
+    ".": "./prettier-config.cjs",
+    "./prettier": "./prettier-config.cjs",
     "./prettier-ignore": "./.prettierignore",
     "./eslint": "./eslint.config.base.mjs",
     "./vitest": "./dist/vitest.config.base.js",
@@ -38,7 +38,7 @@
   "files": [
     "bin",
     "templates",
-    "prettier-config.js",
+    "prettier-config.cjs",
     ".prettierignore",
     "eslint.config.base.mjs",
     "dist",
