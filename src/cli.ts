@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 import { copyFileSync, existsSync, readFileSync, writeFileSync } from "node:fs"
 import { dirname, join } from "node:path"
 import { createInterface } from "node:readline"
