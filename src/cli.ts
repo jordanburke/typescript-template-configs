@@ -22,7 +22,6 @@ const bundledPackages = [
   "eslint-plugin-import",
   "eslint-plugin-prettier",
   "eslint-plugin-simple-import-sort",
-  "globals",
   "prettier",
   "rimraf",
   "ts-node",
