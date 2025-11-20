@@ -14,12 +14,16 @@
   ],
   "author": "jordan.burke@gmail.com",
   "license": "MIT",
+  "type": "module",
   "homepage": "https://github.com/jordanburke/typescript-template-configs",
   "repository": {
     "type": "git",
     "url": "https://github.com/jordanburke/typescript-template-configs"
   },
   "main": "./prettier-config.js",
+  "bin": {
+    "typescript-template-configs": "./bin/init.js"
+  },
   "exports": {
     ".": "./prettier-config.js",
     "./prettier": "./prettier-config.js",
@@ -32,6 +36,8 @@
     "./package.json": "./package.json"
   },
   "files": [
+    "bin",
+    "templates",
     "prettier-config.js",
     ".prettierignore",
     "eslint.config.base.mjs",
