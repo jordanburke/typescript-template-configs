@@ -86,7 +86,7 @@ This is a TypeScript library template designed to be cloned/forked for creating 
   - `noImplicitAny: false` - Allows implicit any for flexibility
   - `strictPropertyInitialization: false` - Relaxed for constructor properties
 - **Target**: ESNext for modern JavaScript features
-- **Output**: TypeScript only emits declaration files; tsup handles transpilation
+- **Output**: TypeScript only emits declaration files; tsdown handles transpilation
 
 ## CLI Usage
 

@@ -8,7 +8,7 @@ This skill provides comprehensive guidance for:
 
 - Creating new TypeScript libraries from the typescript-library-template
 - Applying standardized tooling and scripts to existing projects
-- Configuring modern build tools (tsup, Vitest, ESLint, Prettier)
+- Configuring modern build tools (tsdown, Vitest, ESLint, Prettier)
 - Setting up dual module format (CommonJS + ES modules)
 
 ## Skill Contents
@@ -29,7 +29,7 @@ The skill automatically activates when:
 - Creating new TypeScript libraries or npm packages
 - Standardizing build scripts across TypeScript projects
 - Setting up or migrating to dual module format
-- Configuring tsup, Vitest, ESLint, or Prettier
+- Configuring tsdown, Vitest, ESLint, or Prettier
 - Publishing packages to npm
 - Migrating from webpack, rollup, Jest, or other tools
 
@@ -70,7 +70,7 @@ Migrate existing projects to template standards:
 - Step-by-step migration process
 - Tool-by-tool configuration updates
 - Test migration (Jest → Vitest)
-- Build migration (webpack/rollup → tsup)
+- Build migration (webpack/rollup → tsdown)
 - Common issues and solutions
 
 See: `references/standardization.md`
@@ -79,7 +79,7 @@ See: `references/standardization.md`
 
 Comprehensive configuration reference:
 
-- tsup - Build configuration with all options
+- tsdown - Build configuration with all options
 - Vitest - Testing configuration and patterns
 - ESLint - Flat config format with TypeScript
 - Prettier - Code formatting standards
@@ -112,7 +112,7 @@ pnpm dev             # Development watch
 1. **Consistency** - Same commands work across all projects
 2. **Dual Format** - CommonJS + ES modules with TypeScript declarations
 3. **Type Safety** - Strict TypeScript with pragmatic exceptions
-4. **Modern Tooling** - Fast builds (tsup), fast tests (Vitest)
+4. **Modern Tooling** - Fast builds (tsdown), fast tests (Vitest)
 5. **Quality Gates** - Single `validate` command ensures everything passes
 
 ## Example Usage
@@ -146,7 +146,7 @@ pnpm dev             # Development watch
 
 The skill provides complete, working configurations for:
 
-### tsup.config.ts
+### tsdown.config.ts
 
 Environment-based builds with dual format output
 
@@ -172,7 +172,7 @@ The skill ensures projects meet these standards:
 
 - [ ] Dual module format (CJS + ESM + types)
 - [ ] Standardized scripts (`validate`, `format`, `lint`, etc.)
-- [ ] Modern build tool (tsup)
+- [ ] Modern build tool (tsdown)
 - [ ] Modern test framework (Vitest)
 - [ ] Strict TypeScript configuration
 - [ ] ESLint + Prettier integration
@@ -197,7 +197,7 @@ The skill guides setting up subpath exports:
 
 ### Custom Build Configurations
 
-Adapting tsup for specific needs:
+Adapting tsdown for specific needs:
 
 - Browser-compatible builds
 - Peer dependency handling
@@ -208,8 +208,8 @@ Adapting tsup for specific needs:
 
 Common migration scenarios:
 
-- webpack → tsup
-- rollup → tsup
+- webpack → tsdown
+- rollup → tsdown
 - Jest → Vitest
 - TSLint → ESLint
 - Old ESLint configs → Flat config

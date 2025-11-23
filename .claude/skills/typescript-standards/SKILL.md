@@ -1,6 +1,6 @@
 ---
 name: typescript-standards
-description: Guide for creating TypeScript libraries using the typescript-library-template pattern and applying its standards to existing projects. Use when setting up new npm packages, standardizing build scripts, configuring tooling (tsup, Vitest, ESLint, Prettier), or applying dual module format patterns.
+description: Guide for creating TypeScript libraries using the typescript-library-template pattern and applying its standards to existing projects. Use when setting up new npm packages, standardizing build scripts, configuring tooling (tsdown, Vitest, ESLint, Prettier), or applying dual module format patterns.
 ---
 
 # TypeScript Project Standards
@@ -16,7 +16,7 @@ Trigger this skill when:
 - Creating a new TypeScript library or npm package
 - Standardizing build scripts across TypeScript projects
 - Setting up or migrating to dual module format (CommonJS + ES modules)
-- Configuring modern tooling (tsup, Vitest, ESLint, Prettier)
+- Configuring modern tooling (tsdown, Vitest, ESLint, Prettier)
 - Applying consistent code quality standards
 - Publishing packages to npm
 - Migrating from older build tools (webpack, rollup, tsc alone)
@@ -51,8 +51,8 @@ pnpm validate
 See `references/standardization.md` for detailed migration guide. Quick version:
 
 1. **Update scripts** in package.json to standardized pattern
-2. **Install tooling**: tsup, vitest, eslint, prettier
-3. **Copy configs**: tsup.config.ts, vitest.config.ts, eslint.config.mjs
+2. **Install tooling**: tsdown, vitest, eslint, prettier
+3. **Copy configs**: tsdown.config.ts, vitest.config.ts, eslint.config.mjs
 4. **Update build outputs**: Dual module format with proper exports
 5. **Run validation**: `pnpm validate`
 
@@ -118,7 +118,7 @@ The template supports both CommonJS and ES modules:
 - `dist/` - Production builds (NODE_ENV === "production")
 - Both directories published to npm
 
-### Build Configuration (tsup)
+### Build Configuration (tsdown)
 
 Key features:
 
@@ -164,7 +164,7 @@ Configuration highlights:
   - `noImplicitAny: false`
   - `strictPropertyInitialization: false`
 - ESNext target
-- Declaration files only (tsup handles transpilation)
+- Declaration files only (tsdown handles transpilation)
 
 ## Common Workflows
 
@@ -180,8 +180,8 @@ Configuration highlights:
 
 1. **Audit current setup** - identify gaps
 2. **Update package.json** - scripts and dependencies
-3. **Copy configurations** - tsup, vitest, eslint
-4. **Migrate build** - switch to tsup with dual format
+3. **Copy configurations** - tsdown, vitest, eslint
+4. **Migrate build** - switch to tsdown with dual format
 5. **Update exports** - proper dual module support
 6. **Test thoroughly** - ensure all builds work
 7. **Update documentation** - new commands and workflows
@@ -219,7 +219,7 @@ npm publish --access public
 
 ### Environment-Based Builds
 
-The tsup configuration (line 3 in tsup.config.ts) checks `NODE_ENV`:
+The tsdown configuration (line 3 in tsdown.config.ts) checks `NODE_ENV`:
 
 ```typescript
 const isDev = process.env.NODE_ENV !== "production"
@@ -248,7 +248,7 @@ project/
 │   └── *.spec.ts          # Vitest tests
 ├── lib/                   # Dev builds (gitignored)
 ├── dist/                  # Prod builds (gitignored)
-├── tsup.config.ts         # Build config
+├── tsdown.config.ts         # Build config
 ├── vitest.config.ts       # Test config
 ├── eslint.config.mjs      # Lint config
 ├── .prettierrc            # Format config (optional)
@@ -267,7 +267,7 @@ project/
 
 **Watch mode not working:**
 
-- Check tsup.config.ts has watch: true for dev
+- Check tsdown.config.ts has watch: true for dev
 - Verify NODE_ENV is not set to "production"
 
 ### Test Issues
@@ -288,12 +288,12 @@ project/
 **Dual module problems:**
 
 - Verify package.json exports use correct paths
-- Check tsup generates both .js and .mjs
+- Check tsdown generates both .js and .mjs
 - Test with both `require()` and `import`
 
 **Type definitions missing:**
 
-- Ensure tsup config has `dts: true`
+- Ensure tsdown config has `dts: true`
 - Check .d.ts files generated in dist/
 - Verify types field in package.json
 
@@ -302,8 +302,8 @@ project/
 When applying these standards to an existing project:
 
 - [ ] Update package.json scripts to standardized pattern
-- [ ] Install required devDependencies (tsup, vitest, eslint, prettier)
-- [ ] Copy tsup.config.ts and adjust for your project
+- [ ] Install required devDependencies (tsdown, vitest, eslint, prettier)
+- [ ] Copy tsdown.config.ts and adjust for your project
 - [ ] Copy vitest.config.ts and adjust test patterns
 - [ ] Copy eslint.config.mjs and adjust rules if needed
 - [ ] Add/update .prettierrc with standard config
@@ -326,7 +326,7 @@ When applying these standards to an existing project:
 ### External Links
 
 - **GitHub Template**: https://github.com/jordanburke/typescript-library-template
-- **tsup Documentation**: https://tsup.egoist.dev/
+- **tsdown Documentation**: https://tsdown.egoist.dev/
 - **Vitest Documentation**: https://vitest.dev/
 - **ESLint Flat Config**: https://eslint.org/docs/latest/use/configure/configuration-files
 
@@ -334,7 +334,7 @@ When applying these standards to an existing project:
 
 When working with this template, these files contain the canonical configurations:
 
-- `tsup.config.ts` - Build configuration with environment logic
+- `tsdown.config.ts` - Build configuration with environment logic
 - `vitest.config.ts` - Test configuration with coverage
 - `eslint.config.mjs` - Linting rules and TypeScript integration
 - `package.json` - Scripts, exports, and dependency versions

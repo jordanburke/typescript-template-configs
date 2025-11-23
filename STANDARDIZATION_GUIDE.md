@@ -19,9 +19,9 @@ Please standardize this TypeScript project's npm scripts to match our establishe
      "test:watch": "vitest",
      "test:coverage": "vitest run --coverage",
      "test:ui": "vitest --ui",
-     "build": "rimraf dist && cross-env NODE_ENV=production tsup",
-     "build:watch": "tsup --watch",
-     "dev": "tsup --watch",
+     "build": "rimraf dist && cross-env NODE_ENV=production tsdown",
+     "build:watch": "tsdown --watch",
+     "dev": "tsdown --watch",
      "prepublishOnly": "pnpm ci",
      "ts-types": "tsc --noEmit"
    }
@@ -143,7 +143,7 @@ pnpm dev           # Development mode with watch
 
 1. **ESLint Path** - Adjust `./src` path if your source is elsewhere
 2. **Test Framework** - Replace `vitest` commands if using Jest/Mocha
-3. **Build Tool** - Replace `tsup` commands if using different bundler
+3. **Build Tool** - Replace `tsdown` commands if using different bundler
 4. **Prettier Config** - Ensure Prettier config works with `--write .` pattern
 5. **Dependencies** - May need to install `rimraf`, `cross-env`, etc.
 

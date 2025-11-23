@@ -172,7 +172,7 @@ If not using MIT license:
 pnpm dev
 ```
 
-This runs tsup in watch mode, rebuilding on every file change.
+This runs tsdown in watch mode, rebuilding on every file change.
 
 **File structure:**
 
@@ -456,7 +456,7 @@ Edit `tsconfig.json` for your needs. The template uses strict mode with pragmati
 
 ### Customizing Build
 
-Edit `tsup.config.ts` to:
+Edit `tsdown.config.ts` to:
 
 - Add/remove formats (CJS, ESM, IIFE)
 - Configure minification
@@ -486,7 +486,7 @@ Support imports like `your-library/feature`:
 }
 ```
 
-**tsup.config.ts:**
+**tsdown.config.ts:**
 
 ```typescript
 export default defineConfig({
@@ -548,6 +548,6 @@ Common issues:
 
 - **Template Repository**: https://github.com/jordanburke/typescript-library-template
 - **npm Documentation**: https://docs.npmjs.com/
-- **tsup Documentation**: https://tsup.egoist.dev/
+- **tsdown Documentation**: https://tsdown.dev/
 - **Vitest Documentation**: https://vitest.dev/
 - **Semantic Versioning**: https://semver.org/

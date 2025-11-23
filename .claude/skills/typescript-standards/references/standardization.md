@@ -32,7 +32,7 @@ May require adaptation for:
 
 - ⚠️ React/Vue/Angular applications (keep framework tooling)
 - ⚠️ Browser-only libraries (may not need CJS)
-- ⚠️ Projects with complex webpack configs (evaluate if tsup can replace)
+- ⚠️ Projects with complex webpack configs (evaluate if tsdown can replace)
 - ⚠️ Monorepos (apply per package, not root)
 
 ## Migration Steps
@@ -63,9 +63,9 @@ Replace your existing scripts with the standardized pattern:
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
     "test:ui": "vitest --ui",
-    "build": "rimraf dist && cross-env NODE_ENV=production tsup",
-    "build:watch": "tsup --watch",
-    "dev": "tsup --watch",
+    "build": "rimraf dist && cross-env NODE_ENV=production tsdown",
+    "build:watch": "tsdown --watch",
+    "dev": "tsdown --watch",
     "prepublishOnly": "pnpm validate",
     "ts-types": "tsc --noEmit"
   }
@@ -77,7 +77,7 @@ Replace your existing scripts with the standardized pattern:
 - `validate` as the main pre-checkin command
 - Clear separation: `format` vs `format:check`, `lint` vs `lint:check`
 - Vitest for testing (replaces Jest/Mocha)
-- tsup for building (replaces webpack/rollup/tsc)
+- tsdown for building (replaces webpack/rollup/tsc)
 - `dev` for watch mode development
 
 ### Step 3: Update Dependencies
@@ -99,7 +99,7 @@ pnpm remove tslint
 
 ```bash
 # Build tool
-pnpm add -D tsup cross-env rimraf
+pnpm add -D tsdown cross-env rimraf
 
 # Testing
 pnpm add -D vitest @vitest/coverage-v8 @vitest/ui
@@ -118,12 +118,12 @@ pnpm add -D typescript @types/node ts-node
 pnpm add -D globals
 ```
 
-### Step 4: Create tsup Configuration
+### Step 4: Create tsdown Configuration
 
-Create `tsup.config.ts` in project root:
+Create `tsdown.config.ts` in project root:
 
 ```typescript
-import { defineConfig } from "tsup"
+import { defineConfig } from "tsdown"
 
 const isDev = process.env.NODE_ENV !== "production"
 
@@ -303,8 +303,8 @@ Update `tsconfig.json` for strict mode:
 - `strict: true` - Enable all strict checks
 - `noImplicitAny: false` - Pragmatic: allow implicit any in some cases
 - `strictPropertyInitialization: false` - Easier constructor patterns
-- `target: "ESNext"` - Let tsup handle transpilation
-- `declaration: true` - Generate .d.ts files (though tsup handles this)
+- `target: "ESNext"` - Let tsdown handle transpilation
+- `declaration: true` - Generate .d.ts files (though tsdown handles this)
 
 ### Step 9: Update package.json Exports
 
@@ -460,7 +460,7 @@ Add standardized commands section (see template's CLAUDE.md).
 
 ## Migration Patterns
 
-### From Webpack to tsup
+### From Webpack to tsdown
 
 **Old webpack.config.js:**
 
@@ -478,7 +478,7 @@ module.exports = {
 }
 ```
 
-**New tsup.config.ts:**
+**New tsdown.config.ts:**
 
 ```typescript
 export default defineConfig({
@@ -498,7 +498,7 @@ Benefits:
 - ✅ Automatic dual format
 - ✅ Much faster builds
 
-### From Rollup to tsup
+### From Rollup to tsdown
 
 **Old rollup.config.js:**
 
@@ -515,7 +515,7 @@ export default {
 }
 ```
 
-**New tsup.config.ts:**
+**New tsdown.config.ts:**
 
 ```typescript
 export default defineConfig({
@@ -586,7 +586,7 @@ If you're still using TSLint (deprecated):
 **Solution**:
 
 ```typescript
-// tsup.config.ts
+// tsdown.config.ts
 export default defineConfig({
   external: ["peer-dependency-name"], // Don't bundle peer deps
 })
@@ -622,7 +622,7 @@ pnpm build
 
 **Problem**: TypeScript declaration files missing.
 
-**Solution**: Ensure tsup.config.ts has `dts: true`:
+**Solution**: Ensure tsdown.config.ts has `dts: true`:
 
 ```typescript
 export default defineConfig({
@@ -693,7 +693,7 @@ cp -r ../project-backup project-dir
 Once standardized, you gain:
 
 1. **Consistency** - Same commands across all projects
-2. **Modern tooling** - Faster builds with tsup, better DX with Vitest
+2. **Modern tooling** - Faster builds with tsdown, better DX with Vitest
 3. **Dual format** - Automatic CommonJS and ES module support
 4. **Type safety** - Strict TypeScript configuration
 5. **Quality gates** - Single `validate` command ensures everything passes
@@ -713,6 +713,6 @@ After successful migration:
 ## Resources
 
 - **Template Repository**: https://github.com/jordanburke/typescript-library-template
-- **tsup Documentation**: https://tsup.egoist.dev/
+- **tsdown Documentation**: https://tsdown.egoist.dev/
 - **Vitest Migration**: https://vitest.dev/guide/migration.html
 - **ESLint Flat Config**: https://eslint.org/docs/latest/use/configure/configuration-files

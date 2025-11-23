@@ -2,20 +2,20 @@
 
 Comprehensive reference for all tooling configurations used in the typescript-library-template.
 
-## tsup Configuration
+## tsdown Configuration
 
-tsup is the build tool that handles TypeScript compilation, bundling, and dual module format generation.
+tsdown is the build tool that handles TypeScript compilation, bundling, and dual module format generation.
 
 ### Basic Configuration
 
-File: `tsup.config.ts`
+File: `tsdown.config.ts`
 
 ```typescript
-import type { Options } from "tsup"
+import type { Options } from "tsdown"
 
 const env = process.env.NODE_ENV
 
-export const tsup: Options = {
+export const tsdown: Options = {
   splitting: true,
   sourcemap: true,
   clean: true,
@@ -184,7 +184,7 @@ clean: false
 **Multiple Entry Points with Custom Names:**
 
 ```typescript
-export const tsup: Options = {
+export const tsdown: Options = {
   entry: {
     index: "src/index.ts",
     utils: "src/utils/index.ts",
@@ -204,7 +204,7 @@ This generates:
 **Browser-Compatible Build:**
 
 ```typescript
-export const tsup: Options = {
+export const tsdown: Options = {
   entry: ["src/index.ts"],
   format: ["esm", "iife"],
   globalName: "MyLib",
@@ -217,7 +217,7 @@ export const tsup: Options = {
 **Library with Peer Dependencies:**
 
 ```typescript
-export const tsup: Options = {
+export const tsdown: Options = {
   entry: ["src/index.ts"],
   format: ["cjs", "esm"],
   dts: true,
@@ -689,7 +689,7 @@ File: `tsconfig.json`
 **moduleResolution** - How modules are resolved:
 
 ```json
-"moduleResolution": "bundler"  // For bundlers like tsup (recommended)
+"moduleResolution": "bundler"  // For bundlers like tsdown (recommended)
 "moduleResolution": "node"     // Node.js style
 "moduleResolution": "nodenext" // Modern Node.js
 ```
@@ -767,9 +767,9 @@ import { MyClass } from "@utils/MyClass"
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
     "test:ui": "vitest --ui",
-    "build": "rimraf dist && cross-env NODE_ENV=production tsup",
-    "build:watch": "tsup --watch",
-    "dev": "tsup --watch",
+    "build": "rimraf dist && cross-env NODE_ENV=production tsdown",
+    "build:watch": "tsdown --watch",
+    "dev": "tsdown --watch",
     "prepublishOnly": "pnpm validate",
     "ts-types": "tsc --noEmit"
   }
@@ -793,7 +793,7 @@ my-library/
 ├── eslint.config.mjs
 ├── package.json
 ├── tsconfig.json
-├── tsup.config.ts
+├── tsdown.config.ts
 ├── vitest.config.ts
 ├── CLAUDE.md
 └── README.md
@@ -804,10 +804,10 @@ my-library/
 ### Build Issues
 
 **Problem**: "Cannot find module"
-**Solution**: Check tsup external configuration or package.json exports
+**Solution**: Check tsdown external configuration or package.json exports
 
 **Problem**: "Types not generated"
-**Solution**: Ensure `dts: true` in tsup.config.ts
+**Solution**: Ensure `dts: true` in tsdown.config.ts
 
 ### Test Issues
 
@@ -827,7 +827,7 @@ my-library/
 
 ## Resources
 
-- **tsup**: https://tsup.egoist.dev/
+- **tsdown**: https://tsdown.dev/
 - **Vitest**: https://vitest.dev/
 - **ESLint**: https://eslint.org/
 - **Prettier**: https://prettier.io/
