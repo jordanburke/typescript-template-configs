@@ -50,15 +50,18 @@ This package uses [npm trusted publishers](https://docs.npmjs.com/trusted-publis
 ## Troubleshooting
 
 ### Publish fails with 404
+
 - Verify trusted publisher config on npmjs.com matches:
   - Repository owner: `jordanburke`
   - Repository name: `typescript-template-configs`
   - Workflow filename: `publish.yml`
-  - Environment: *(blank)*
+  - Environment: _(blank)_
 
 ### GitHub release fails with 403
+
 - Check `contents: write` permission in `.github/workflows/publish.yml`
 
 ### npm version compatibility
+
 - Workflow updates npm to latest before publishing
 - Requires Node 20+ (configured in `.nvmrc`)

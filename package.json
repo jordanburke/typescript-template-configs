@@ -9,7 +9,7 @@
     "eslint",
     "prettier",
     "vitest",
-    "tsup",
+    "tsdown",
     "shared-config"
   ],
   "author": "jordan.burke@gmail.com",
@@ -31,7 +31,7 @@
     "./eslint": "./eslint.config.base.mjs",
     "./vitest": "./dist/vitest.config.base.js",
     "./tsconfig": "./tsconfig.base.json",
-    "./tsup": "./dist/tsup.config.base.js",
+    "./tsdown": "./dist/tsdown.config.base.js",
     "./scripts": "./package-scripts.json",
     "./package.json": "./package.json"
   },
@@ -53,8 +53,8 @@
     "@types/node": "^22.19.1",
     "@typescript-eslint/eslint-plugin": "^8.47.0",
     "@typescript-eslint/parser": "^8.47.0",
-    "@vitest/coverage-v8": "^4.0.10",
-    "@vitest/ui": "^4.0.10",
+    "@vitest/coverage-v8": "^4.0.13",
+    "@vitest/ui": "^4.0.13",
     "cross-env": "^10.1.0",
     "eslint": "^9.39.1",
     "eslint-config-prettier": "^10.1.8",
@@ -66,23 +66,23 @@
     "rimraf": "^6.1.2",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3",
-    "vitest": "^4.0.10"
+    "vitest": "^4.0.13"
   },
   "devDependencies": {
-    "tsup": "^8.5.1"
+    "tsdown": "^0.16.6"
   },
   "peerDependencies": {
-    "tsup": "^8.x"
+    "tsdown": "^0.x"
   },
   "peerDependenciesMeta": {
-    "tsup": {
+    "tsdown": {
       "optional": true
     }
   },
   "scripts": {
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "build": "rimraf dist && tsup",
+    "build": "rimraf dist && tsdown",
     "test": "vitest run",
     "test:watch": "vitest",
     "validate": "pnpm format && pnpm build && pnpm test",

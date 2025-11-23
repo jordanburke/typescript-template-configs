@@ -1,20 +1,20 @@
-import { defineConfig } from "tsup"
+import { defineConfig } from "tsdown"
 
 export default defineConfig([
   // Config files (no shebang)
   {
-    entry: ["src/tsup.config.base.ts", "src/vitest.config.base.ts"],
+    entry: ["src/tsdown.config.base.ts", "src/vitest.config.base.ts"],
     format: ["esm"],
     dts: false,
     clean: true,
     outDir: "dist",
-    splitting: false,
     sourcemap: false,
     minify: false,
-    bundle: false,
-    skipNodeModulesBundle: true,
     target: "es2022",
-    outExtension: () => ({ js: ".js" }),
+    tsconfig: "tsconfig.json",
+    outputOptions: {
+      entryFileNames: "[name].js",
+    },
   },
   // CLI (with shebang)
   {
@@ -22,13 +22,13 @@ export default defineConfig([
     format: ["esm"],
     dts: false,
     outDir: "dist",
-    splitting: false,
     sourcemap: false,
     minify: false,
-    bundle: false,
-    skipNodeModulesBundle: true,
     target: "es2022",
-    outExtension: () => ({ js: ".js" }),
+    tsconfig: "tsconfig.json",
+    outputOptions: {
+      entryFileNames: "[name].js",
+    },
     banner: {
       js: "#!/usr/bin/env node",
     },

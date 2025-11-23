@@ -18,7 +18,7 @@ This package provides base configuration files for TypeScript library templates:
 - **`eslint.config.base.mjs`** - Base ESLint rules + TypeScript support
 - **`vitest.config.base.ts`** - Vitest test framework configuration
 - **`tsconfig.base.json`** - TypeScript compiler base settings
-- **`tsup.config.base.ts`** - Build configuration for tsup
+- **`tsdown.config.base.ts`** - Build configuration for tsdown
 - **`package-scripts.json`** - Standardized npm scripts reference
 
 ## 🚀 Installation
@@ -26,14 +26,8 @@ This package provides base configuration files for TypeScript library templates:
 ```bash
 pnpm add -D typescript-template-configs
 
-# Also install peer dependencies:
-pnpm add -D \
-  eslint prettier typescript vitest tsup \
-  @typescript-eslint/eslint-plugin @typescript-eslint/parser \
-  eslint-config-prettier eslint-plugin-prettier \
-  eslint-plugin-import eslint-plugin-simple-import-sort \
-  @eslint/js @eslint/eslintrc globals \
-  @vitest/coverage-v8 cross-env rimraf
+# Also install peer dependency:
+pnpm add -D tsdown
 ```
 
 ## 🛠️ CLI Commands
@@ -80,7 +74,7 @@ Since this package bundles all tooling, you only need:
 {
   "devDependencies": {
     "typescript-template-configs": "^3.0.0",
-    "tsup": "^8.0.0"
+    "tsdown": "^0.12.0"
   }
 }
 ```
@@ -200,13 +194,13 @@ export default defineConfig({
 }
 ```
 
-### Tsup (Extendable)
+### Tsdown (Extendable)
 
 **Basic usage:**
 
 ```typescript
-// tsup.config.ts
-import baseConfig from "typescript-template-configs/tsup"
+// tsdown.config.ts
+import baseConfig from "typescript-template-configs/tsdown"
 
 export default baseConfig
 ```
@@ -214,14 +208,14 @@ export default baseConfig
 **Extended usage (customize entry points):**
 
 ```typescript
-// tsup.config.ts
-import baseConfig from "typescript-template-configs/tsup"
-import type { Options } from "tsup"
+// tsdown.config.ts
+import baseConfig from "typescript-template-configs/tsdown"
+import type { UserConfig } from "tsdown"
 
 export default {
   ...baseConfig,
   entry: ["src/index.ts", "src/cli.ts"], // Multiple entry points
-} satisfies Options
+} satisfies UserConfig
 ```
 
 ### Package Scripts (Reference Only)
@@ -240,9 +234,9 @@ The `package-scripts.json` file contains standardized npm scripts. Copy the rele
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
     "test:ui": "vitest --ui",
-    "build": "rimraf dist && cross-env NODE_ENV=production tsup",
-    "build:watch": "tsup --watch",
-    "dev": "tsup --watch",
+    "build": "rimraf dist && cross-env NODE_ENV=production tsdown",
+    "build:watch": "tsdown --watch",
+    "dev": "tsdown --watch",
     "prepublishOnly": "pnpm validate",
     "ts-types": "tsc"
   }
@@ -293,7 +287,7 @@ This package follows semver:
 
 Templates using these configs:
 
-- **[typescript-library-template](https://github.com/jordanburke/typescript-library-template)** - Base template (tsup)
+- **[typescript-library-template](https://github.com/jordanburke/typescript-library-template)** - Base template (tsdown)
 - **typescript-library-template-vite** - Vite-based variant (coming soon)
 - **typescript-library-template-react** - React library variant (coming soon)
 

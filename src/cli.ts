@@ -61,7 +61,7 @@ DESCRIPTION:
   tooling as dependencies. You only need to install:
 
   - typescript-template-configs (this package)
-  - tsup (peer dependency for building)
+  - tsdown (peer dependency for building)
 
   Run 'npx typescript-template-configs info' to see the full list
   of bundled packages.
@@ -77,13 +77,13 @@ ${bundledPackages.map((pkg) => `  - ${pkg}`).join("\n")}
 
 You ONLY need to install:
   - typescript-template-configs (this package)
-  - tsup (peer dependency, optional)
+  - tsdown (peer dependency, optional)
 
 Example minimal package.json devDependencies:
 {
   "devDependencies": {
     "typescript-template-configs": "^3.0.0",
-    "tsup": "^8.0.0"
+    "tsdown": "^0.12.0"
   }
 }
 `)

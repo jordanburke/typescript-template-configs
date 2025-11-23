@@ -49,14 +49,14 @@ This is a TypeScript library template designed to be cloned/forked for creating 
 
 ### Build System
 
-- **tsup**: Primary build tool configured in `tsup.config.ts`
+- **tsdown**: Primary build tool configured in `tsdown.config.ts`
 - **Dual Output Directories**:
   - `lib/` - Development builds (NODE_ENV !== "production", used during `pnpm dev`)
   - `dist/` - Production builds (NODE_ENV === "production", used for publishing)
 - **Format Support**: Generates both CommonJS (`.js`) and ES modules (`.mjs`)
 - **TypeScript**: Auto-generates `.d.ts` declaration files for both formats
 - **Environment-Based Behavior**:
-  - Production: minified, bundled, no watch
+  - Production: minified, no watch
   - Development: source maps, watch mode, faster builds
 
 ### Testing Framework
@@ -104,16 +104,14 @@ npx typescript-template-configs cleanup --yes  # auto-confirm removal
 
 ### Bundled Packages
 
-The CLI's `info` command shows all 19 packages bundled with this config that users don't need to install:
+The CLI's `info` command shows all 18 packages bundled with this config that users don't need to install:
 
 - eslint, prettier, typescript, vitest
 - @typescript-eslint/eslint-plugin, @typescript-eslint/parser
 - eslint-config-prettier, eslint-plugin-prettier, eslint-plugin-import, eslint-plugin-simple-import-sort
 - @eslint/js, @eslint/eslintrc, globals
 - @vitest/coverage-v8, @vitest/ui
-- cross-env, rimraf, ts-node, @types/node
-
-Only peer dependency needed: `tsup`
+- cross-env, rimraf, ts-node
 
 ### Local Development
 
@@ -136,13 +134,15 @@ typescript-template-configs help
 - **Published files**: `dist/` and `templates/` included in npm package
 - **Commands**: help, info, cleanup, init (default)
 
+Only peer dependency needed: `tsdown`
+
 ## Key Files
 
 - `src/index.ts` - Main library entry point
 - `src/cli.ts` - CLI script for project initialization (TypeScript)
 - `templates/npmrc` - Template for .npmrc (hoists CLI binaries)
 - `test/*.spec.ts` - Test files using Vitest
-- `tsup.config.ts` - Build configuration with environment-based settings (line 3 checks NODE_ENV)
+- `tsdown.config.ts` - Build configuration
 - `vitest.config.ts` - Test configuration with coverage settings
 - `eslint.config.mjs` - Linting rules and TypeScript integration
 - `STANDARDIZATION_GUIDE.md` - Instructions for applying this pattern to other projects

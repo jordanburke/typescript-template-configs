@@ -31,7 +31,7 @@ describe("CLI", () => {
     expect(output).toContain("prettier")
     expect(output).toContain("typescript")
     expect(output).toContain("vitest")
-    expect(output).toContain("tsup")
+    expect(output).toContain("tsdown")
   })
 
   it("should run init by default", () => {
