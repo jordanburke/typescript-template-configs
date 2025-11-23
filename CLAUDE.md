@@ -37,9 +37,21 @@ This is a TypeScript library template designed to be cloned/forked for creating 
 - `pnpm build:watch` - Watch mode build
 - `pnpm dev` - Development build with watch mode (alias for build:watch)
 
-### Publishing
+### Publishing (Tag-based Release)
 
-- `prepublishOnly` - Automatically runs `pnpm validate` before publishing
+Releases are automated via GitHub Actions. To publish a new version:
+
+1. Update version in `package.json`
+2. Commit with message like `chore: bump version to X.Y.Z`
+3. Create and push a git tag: `git tag -a vX.Y.Z -m "vX.Y.Z" && git push origin main --tags`
+4. GitHub Actions will automatically:
+   - Run validation
+   - Publish to npm with provenance
+   - Create a GitHub Release with auto-generated notes
+
+**Workflows**:
+- `publish.yml` - Triggers on `v*` tags, publishes to npm
+- `auto-release.yml` - Auto-bumps patch version for dependency updates
 
 ### Type Checking
 
