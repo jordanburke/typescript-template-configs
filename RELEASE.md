@@ -53,7 +53,7 @@ This package uses [npm trusted publishers](https://docs.npmjs.com/trusted-publis
 
 - Verify trusted publisher config on npmjs.com matches:
   - Repository owner: `jordanburke`
-  - Repository name: `typescript-template-configs`
+  - Repository name: `ts-builds`
   - Workflow filename: `publish.yml`
   - Environment: _(blank)_
 

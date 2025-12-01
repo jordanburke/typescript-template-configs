@@ -7,7 +7,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url))
 const templateDir = join(__dirname, "..", "templates")
 const targetDir = process.cwd()
 
-// Packages bundled with typescript-template-configs (users don't need these)
+// Packages bundled with ts-builds (users don't need these)
 const bundledPackages = [
   "@eslint/eslintrc",
   "@eslint/js",
@@ -40,10 +40,10 @@ const files = [{ src: "npmrc", dest: ".npmrc" }]
 
 function showHelp(): void {
   console.log(`
-typescript-template-configs - Shared TypeScript configuration files
+ts-builds - Shared TypeScript configuration files
 
 USAGE:
-  npx typescript-template-configs [command]
+  npx ts-builds [command]
 
 COMMANDS:
   init      Initialize project with config files (default)
@@ -52,37 +52,37 @@ COMMANDS:
   help      Show this help message
 
 EXAMPLES:
-  npx typescript-template-configs          # Initialize project
-  npx typescript-template-configs info     # List bundled packages
-  npx typescript-template-configs cleanup  # Remove redundant deps
+  npx ts-builds          # Initialize project
+  npx ts-builds info     # List bundled packages
+  npx ts-builds cleanup  # Remove redundant deps
 
 DESCRIPTION:
   This package bundles all ESLint, Prettier, Vitest, and TypeScript
   tooling as dependencies. You only need to install:
 
-  - typescript-template-configs (this package)
+  - ts-builds (this package)
   - tsdown (peer dependency for building)
 
-  Run 'npx typescript-template-configs info' to see the full list
+  Run 'npx ts-builds info' to see the full list
   of bundled packages.
 `)
 }
 
 function showInfo(): void {
   console.log(`
-typescript-template-configs bundles these packages:
+ts-builds bundles these packages:
 
 You DON'T need to install:
 ${bundledPackages.map((pkg) => `  - ${pkg}`).join("\n")}
 
 You ONLY need to install:
-  - typescript-template-configs (this package)
+  - ts-builds (this package)
   - tsdown (peer dependency, optional)
 
 Example minimal package.json devDependencies:
 {
   "devDependencies": {
-    "typescript-template-configs": "^3.0.0",
+    "ts-builds": "^3.0.0",
     "tsdown": "^0.12.0"
   }
 }
@@ -109,7 +109,7 @@ async function cleanup(): Promise<void> {
     return
   }
 
-  console.log("\nFound redundant packages that are bundled with typescript-template-configs:\n")
+  console.log("\nFound redundant packages that are bundled with ts-builds:\n")
 
   if (redundantDev.length > 0) {
     console.log("devDependencies to remove:")
@@ -166,7 +166,7 @@ async function cleanup(): Promise<void> {
 }
 
 function init(): void {
-  console.log("Initializing typescript-template-configs...")
+  console.log("Initializing ts-builds...")
 
   for (const { src: srcFile, dest: destFile } of files) {
     const src = join(templateDir, srcFile)
@@ -182,8 +182,8 @@ function init(): void {
 
   console.log("\nDone! Your project is configured to hoist CLI binaries from peer dependencies.")
   console.log("\nNext steps:")
-  console.log("  - Run 'npx typescript-template-configs info' to see bundled packages")
-  console.log("  - Run 'npx typescript-template-configs cleanup' to remove redundant deps")
+  console.log("  - Run 'npx ts-builds info' to see bundled packages")
+  console.log("  - Run 'npx ts-builds cleanup' to remove redundant deps")
 }
 
 // Parse command

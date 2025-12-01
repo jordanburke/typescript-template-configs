@@ -1,6 +1,6 @@
-# typescript-template-configs
+# ts-builds
 
-[![Validate Configs Package](https://github.com/jordanburke/typescript-template-configs/actions/workflows/node.js.yml/badge.svg)](https://github.com/jordanburke/typescript-template-configs/actions/workflows/node.js.yml)
+[![Validate Configs Package](https://github.com/jordanburke/ts-builds/actions/workflows/node.js.yml/badge.svg)](https://github.com/jordanburke/ts-builds/actions/workflows/node.js.yml)
 
 Shared TypeScript configuration files for library templates. Provides standardized ESLint, Prettier, Vitest, TypeScript, and build configs.
 
@@ -24,7 +24,7 @@ This package provides base configuration files for TypeScript library templates:
 ## 🚀 Installation
 
 ```bash
-pnpm add -D typescript-template-configs
+pnpm add -D ts-builds
 
 # Also install peer dependency:
 pnpm add -D tsdown
@@ -35,9 +35,9 @@ pnpm add -D tsdown
 ### Initialize Project
 
 ```bash
-npx typescript-template-configs
+npx ts-builds
 # or
-npx typescript-template-configs init
+npx ts-builds init
 ```
 
 Creates `.npmrc` to configure pnpm to hoist CLI binaries from peer dependencies.
@@ -45,13 +45,13 @@ Creates `.npmrc` to configure pnpm to hoist CLI binaries from peer dependencies.
 ### Show Help
 
 ```bash
-npx typescript-template-configs help
+npx ts-builds help
 ```
 
 ### List Bundled Packages
 
 ```bash
-npx typescript-template-configs info
+npx ts-builds info
 ```
 
 Shows all 19 packages bundled with this config (eslint, prettier, typescript, vitest, etc.) that you **don't need to install separately**.
@@ -59,12 +59,12 @@ Shows all 19 packages bundled with this config (eslint, prettier, typescript, vi
 ### Remove Redundant Dependencies
 
 ```bash
-npx typescript-template-configs cleanup
+npx ts-builds cleanup
 # or auto-confirm with
-npx typescript-template-configs cleanup --yes
+npx ts-builds cleanup --yes
 ```
 
-Scans your `package.json` and removes any devDependencies that are already bundled with `typescript-template-configs`.
+Scans your `package.json` and removes any devDependencies that are already bundled with `ts-builds`.
 
 ### Minimal Installation
 
@@ -73,7 +73,7 @@ Since this package bundles all tooling, you only need:
 ```json
 {
   "devDependencies": {
-    "typescript-template-configs": "^3.0.0",
+    "ts-builds": "^1.0.0",
     "tsdown": "^0.12.0"
   }
 }
@@ -88,7 +88,7 @@ node dist/cli.js help
 
 # Or link globally
 pnpm link --global
-typescript-template-configs help
+ts-builds help
 ```
 
 ## 📖 Usage
@@ -98,15 +98,15 @@ typescript-template-configs help
 Copy the Prettier config to your project root:
 
 ```bash
-cp node_modules/typescript-template-configs/.prettierrc .
-cp node_modules/typescript-template-configs/.prettierignore .
+cp node_modules/ts-builds/.prettierrc .
+cp node_modules/ts-builds/.prettierignore .
 ```
 
 Or reference it in your `package.json`:
 
 ```json
 {
-  "prettier": "typescript-template-configs/prettier"
+  "prettier": "ts-builds/prettier"
 }
 ```
 
@@ -116,7 +116,7 @@ Or reference it in your `package.json`:
 
 ```javascript
 // eslint.config.mjs
-import baseConfig from "typescript-template-configs/eslint"
+import baseConfig from "ts-builds/eslint"
 
 export default [...baseConfig]
 ```
@@ -125,7 +125,7 @@ export default [...baseConfig]
 
 ```javascript
 // eslint.config.mjs
-import baseConfig from "typescript-template-configs/eslint"
+import baseConfig from "ts-builds/eslint"
 
 export default [
   ...baseConfig,
@@ -147,7 +147,7 @@ export default [
 ```typescript
 // vitest.config.ts
 import { defineConfig } from "vitest/config"
-import baseConfig from "typescript-template-configs/vitest"
+import baseConfig from "ts-builds/vitest"
 
 export default defineConfig(baseConfig)
 ```
@@ -157,7 +157,7 @@ export default defineConfig(baseConfig)
 ```typescript
 // vitest.config.ts
 import { defineConfig } from "vitest/config"
-import baseConfig from "typescript-template-configs/vitest"
+import baseConfig from "ts-builds/vitest"
 
 export default defineConfig({
   ...baseConfig,
@@ -174,7 +174,7 @@ export default defineConfig({
 
 ```json
 {
-  "extends": "typescript-template-configs/tsconfig",
+  "extends": "ts-builds/tsconfig",
   "compilerOptions": {
     "outDir": "./dist"
   }
@@ -185,7 +185,7 @@ export default defineConfig({
 
 ```json
 {
-  "extends": "typescript-template-configs/tsconfig",
+  "extends": "ts-builds/tsconfig",
   "compilerOptions": {
     "outDir": "./dist",
     "jsx": "react-jsx",
@@ -200,7 +200,7 @@ export default defineConfig({
 
 ```typescript
 // tsdown.config.ts
-import baseConfig from "typescript-template-configs/tsdown"
+import baseConfig from "ts-builds/tsdown"
 
 export default baseConfig
 ```
@@ -209,7 +209,7 @@ export default baseConfig
 
 ```typescript
 // tsdown.config.ts
-import baseConfig from "typescript-template-configs/tsdown"
+import baseConfig from "ts-builds/tsdown"
 import type { UserConfig } from "tsdown"
 
 export default {
@@ -249,11 +249,11 @@ When configs are updated in this package, update your template:
 
 ```bash
 # Update to latest version
-pnpm update typescript-template-configs
+pnpm update ts-builds
 
 # Re-copy locked files (Prettier)
-cp node_modules/typescript-template-configs/.prettierrc .
-cp node_modules/typescript-template-configs/.prettierignore .
+cp node_modules/ts-builds/.prettierrc .
+cp node_modules/ts-builds/.prettierignore .
 
 # Test that everything still works
 pnpm validate

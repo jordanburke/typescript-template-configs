@@ -1,6 +1,6 @@
 {
-  "name": "typescript-template-configs",
-  "version": "4.0.1",
+  "name": "ts-builds",
+  "version": "1.0.0",
   "description": "Shared TypeScript configuration files for library templates. Provides standardized ESLint, Prettier, Vitest, TypeScript, and build configs.",
   "keywords": [
     "typescript",
@@ -15,14 +15,14 @@
   "author": "jordan.burke@gmail.com",
   "license": "MIT",
   "type": "module",
-  "homepage": "https://github.com/jordanburke/typescript-template-configs",
+  "homepage": "https://github.com/jordanburke/ts-builds",
   "repository": {
     "type": "git",
-    "url": "https://github.com/jordanburke/typescript-template-configs"
+    "url": "https://github.com/jordanburke/ts-builds"
   },
   "main": "./prettier-config.js",
   "bin": {
-    "typescript-template-configs": "./dist/cli.js"
+    "ts-builds": "./dist/cli.js"
   },
   "exports": {
     ".": "./prettier-config.js",

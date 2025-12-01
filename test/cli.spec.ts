@@ -11,7 +11,7 @@ function runCli(args: string = ""): string {
 describe("CLI", () => {
   it("should show help with help command", () => {
     const output = runCli("help")
-    expect(output).toContain("typescript-template-configs")
+    expect(output).toContain("ts-builds")
     expect(output).toContain("USAGE:")
     expect(output).toContain("COMMANDS:")
     expect(output).toContain("init")
@@ -36,6 +36,6 @@ describe("CLI", () => {
 
   it("should run init by default", () => {
     const output = runCli("")
-    expect(output).toContain("Initializing typescript-template-configs")
+    expect(output).toContain("Initializing ts-builds")
   })
 })

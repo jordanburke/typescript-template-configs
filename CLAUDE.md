@@ -108,11 +108,11 @@ This package includes a CLI for initializing projects and managing dependencies.
 ### Commands
 
 ```bash
-npx typescript-template-configs          # init (default) - create .npmrc
-npx typescript-template-configs help     # show help and usage
-npx typescript-template-configs info     # list bundled packages
-npx typescript-template-configs cleanup  # remove redundant deps from package.json
-npx typescript-template-configs cleanup --yes  # auto-confirm removal
+npx ts-builds          # init (default) - create .npmrc
+npx ts-builds help     # show help and usage
+npx ts-builds info     # list bundled packages
+npx ts-builds cleanup  # remove redundant deps from package.json
+npx ts-builds cleanup --yes  # auto-confirm removal
 ```
 
 ### Bundled Packages
@@ -136,7 +136,7 @@ node dist/cli.js info
 
 # Or link globally
 pnpm link --global
-typescript-template-configs help
+ts-builds help
 ```
 
 ### CLI Architecture
