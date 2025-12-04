@@ -143,8 +143,7 @@ ts-builds help
 
 - **Source**: `src/cli.ts` - TypeScript CLI source
 - **Output**: `dist/cli.js` - Compiled CLI with shebang
-- **Templates directory**: `templates/` - Source files to copy
-- **Published files**: `dist/` and `templates/` included in npm package
+- **Published files**: `dist/` included in npm package
 - **Commands**: help, info, cleanup, init (default)
 
 Only peer dependency needed: `tsdown`
@@ -153,7 +152,6 @@ Only peer dependency needed: `tsdown`
 
 - `src/index.ts` - Main library entry point
 - `src/cli.ts` - CLI script for project initialization (TypeScript)
-- `templates/npmrc` - Template for .npmrc (hoists CLI binaries)
 - `test/*.spec.ts` - Test files using Vitest
 - `tsdown.config.ts` - Build configuration
 - `vitest.config.ts` - Test configuration with coverage settings

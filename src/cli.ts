@@ -1,10 +1,7 @@
-import { copyFileSync, existsSync, readFileSync, writeFileSync } from "node:fs"
-import { dirname, join } from "node:path"
+import { existsSync, readFileSync, writeFileSync } from "node:fs"
+import { join } from "node:path"
 import { createInterface } from "node:readline"
-import { fileURLToPath } from "node:url"
 
-const __dirname = dirname(fileURLToPath(import.meta.url))
-const templateDir = join(__dirname, "..", "templates")
 const targetDir = process.cwd()
 
 // Packages bundled with ts-builds (users don't need these)
@@ -36,7 +33,45 @@ interface PackageJson {
   [key: string]: unknown
 }
 
-const files = [{ src: "npmrc", dest: ".npmrc" }]
+const requiredHoistPatterns = [
+  "public-hoist-pattern[]=*eslint*",
+  "public-hoist-pattern[]=*prettier*",
+  "public-hoist-pattern[]=*vitest*",
+  "public-hoist-pattern[]=typescript",
+  "public-hoist-pattern[]=*rimraf*",
+  "public-hoist-pattern[]=*cross-env*",
+]
+
+function ensureNpmrcHoistPatterns(): void {
+  const npmrcPath = join(targetDir, ".npmrc")
+  const existingContent = existsSync(npmrcPath) ? readFileSync(npmrcPath, "utf-8") : ""
+
+  const missingPatterns = requiredHoistPatterns.filter((pattern) => !existingContent.includes(pattern))
+
+  if (missingPatterns.length === 0) {
+    return
+  }
+
+  const header = "# Hoist CLI tool binaries from peer dependencies"
+  const hasHeader = existingContent.includes(header)
+
+  let newContent = existingContent
+  if (!hasHeader && missingPatterns.length > 0) {
+    const separator =
+      existingContent.length > 0 && !existingContent.endsWith("\n") ? "\n\n" : existingContent.length > 0 ? "\n" : ""
+    newContent = existingContent + separator + header + "\n"
+  }
+
+  for (const pattern of missingPatterns) {
+    if (!newContent.endsWith("\n") && newContent.length > 0) {
+      newContent += "\n"
+    }
+    newContent += pattern + "\n"
+  }
+
+  writeFileSync(npmrcPath, newContent)
+  console.log(`✓ Updated .npmrc with ${missingPatterns.length} missing hoist pattern(s)`)
+}
 
 function showHelp(): void {
   console.log(`
@@ -168,17 +203,7 @@ async function cleanup(): Promise<void> {
 function init(): void {
   console.log("Initializing ts-builds...")
 
-  for (const { src: srcFile, dest: destFile } of files) {
-    const src = join(templateDir, srcFile)
-    const dest = join(targetDir, destFile)
-
-    if (existsSync(dest)) {
-      console.log(`  ⚠ ${destFile} already exists, skipping`)
-    } else {
-      copyFileSync(src, dest)
-      console.log(`  ✓ Created ${destFile}`)
-    }
-  }
+  ensureNpmrcHoistPatterns()
 
   console.log("\nDone! Your project is configured to hoist CLI binaries from peer dependencies.")
   console.log("\nNext steps:")
