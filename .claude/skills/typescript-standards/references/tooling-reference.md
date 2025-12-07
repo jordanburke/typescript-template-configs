@@ -9,9 +9,11 @@ ts-builds provides a CLI that runs standardized commands across all projects.
 ### Setup Commands
 
 ```bash
-npx ts-builds init      # Initialize .npmrc with hoist patterns
-npx ts-builds info      # Show bundled packages
-npx ts-builds cleanup   # Remove redundant dependencies
+npx ts-builds init      # Initialize .npmrc with hoist patterns (run first)
+npx ts-builds config    # Create ts-builds.config.json
+npx ts-builds config --force  # Overwrite existing config
+npx ts-builds info      # Show bundled packages you don't need to install
+npx ts-builds cleanup   # Remove redundant dependencies from package.json
 npx ts-builds help      # Show all commands
 ```
 

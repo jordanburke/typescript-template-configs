@@ -35,11 +35,15 @@ pnpm init
 # Install ts-builds (bundles all tooling)
 pnpm add -D ts-builds tsdown
 
-# Initialize (creates .npmrc with hoist patterns)
-npx ts-builds init
+# Initialize project
+npx ts-builds init      # Creates .npmrc with hoist patterns
+npx ts-builds config    # Creates ts-builds.config.json
+
+# Create source files
+mkdir src test
+echo 'export const hello = () => "Hello!"' > src/index.ts
 
 # Set up package.json scripts (see below)
-# Add your code to src/
 
 # Validate everything works
 npx ts-builds validate
@@ -47,24 +51,38 @@ npx ts-builds validate
 
 ### Scenario 2: Applying Standards to Existing Project
 
-See `references/standardization.md` for detailed migration guide. Quick version:
+```bash
+# Install ts-builds
+pnpm add -D ts-builds tsdown
 
-1. **Install ts-builds**: `pnpm add -D ts-builds tsdown`
-2. **Run init**: `npx ts-builds init`
-3. **Update scripts** in package.json to use ts-builds CLI
-4. **Create config** (optional): `ts-builds.config.json` for customization
-5. **Run validation**: `npx ts-builds validate`
+# Initialize and configure
+npx ts-builds init      # Creates .npmrc with hoist patterns
+npx ts-builds config    # Creates ts-builds.config.json
+npx ts-builds cleanup   # Remove redundant dependencies
 
-## Core Standards
+# Update package.json scripts to use ts-builds CLI (see below)
+
+# Validate
+npx ts-builds validate
+```
+
+## CLI Reference
+
+### Setup Commands
+
+```bash
+npx ts-builds init      # Create .npmrc with hoist patterns (run first)
+npx ts-builds config    # Create ts-builds.config.json
+npx ts-builds config --force  # Overwrite existing config
+npx ts-builds info      # Show bundled packages you don't need to install
+npx ts-builds cleanup   # Remove redundant dependencies from package.json
+npx ts-builds help      # Show all commands
+```
 
 ### Script Commands
 
-ts-builds provides a CLI that runs standardized commands. Use either directly or via package.json scripts.
-
-**Direct CLI usage:**
-
 ```bash
-npx ts-builds validate      # Format → Lint → Typecheck → Test → Build
+npx ts-builds validate      # Run full validation chain
 npx ts-builds format        # Format with Prettier (--write)
 npx ts-builds format:check  # Check formatting only
 npx ts-builds lint          # Lint with ESLint (--fix)
@@ -79,7 +97,11 @@ npx ts-builds build:watch   # Watch mode build
 npx ts-builds dev           # Alias for build:watch
 ```
 
-**Recommended package.json scripts:**
+## Core Standards
+
+### Package.json Scripts
+
+Add these scripts to delegate all commands to ts-builds:
 
 ```json
 {
@@ -99,7 +121,7 @@ npx ts-builds dev           # Alias for build:watch
 }
 ```
 
-This delegates all commands to ts-builds, ensuring consistency across projects.
+This ensures consistency across all projects using ts-builds.
 
 ### Configuration (ts-builds.config.json)
 

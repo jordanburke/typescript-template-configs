@@ -213,7 +213,8 @@ USAGE:
   npx ts-builds [command]
 
 SETUP COMMANDS:
-  init      Initialize project with config files (default)
+  init      Initialize project with .npmrc hoist patterns (default)
+  config    Create ts-builds.config.json (use --force to overwrite)
   info      Show bundled packages you don't need to install
   cleanup   Remove redundant dependencies from package.json
   help      Show this help message
@@ -379,8 +380,48 @@ function init(): void {
 
   console.log("\nDone! Your project is configured to hoist CLI binaries from peer dependencies.")
   console.log("\nNext steps:")
+  console.log("  - Run 'npx ts-builds config' to create a config file")
   console.log("  - Run 'npx ts-builds info' to see bundled packages")
   console.log("  - Run 'npx ts-builds cleanup' to remove redundant deps")
+}
+
+function createConfig(force = false): void {
+  const configPath = join(targetDir, "ts-builds.config.json")
+
+  if (existsSync(configPath) && !force) {
+    console.log("ts-builds.config.json already exists.")
+    console.log("Use 'ts-builds config --force' to overwrite.")
+    return
+  }
+
+  const defaultConfig: TsBuildsConfig = {
+    srcDir: "./src",
+    validateChain: ["format", "lint", "typecheck", "test", "build"],
+  }
+
+  writeFileSync(configPath, JSON.stringify(defaultConfig, null, 2) + "\n")
+  console.log("✓ Created ts-builds.config.json")
+  console.log(`
+Configuration options:
+  srcDir         Source directory for linting (default: "./src")
+  testDir        Test directory (default: "./test")
+  validateChain  Commands to run for validate (default shown above)
+  commands       Custom commands: { "name": "shell command" }
+  chains         Named chains: { "validate:fast": ["format", "lint"] }
+
+Example with custom commands:
+{
+  "srcDir": "./src",
+  "commands": {
+    "docs": "pnpm docs:build",
+    "subproject": { "run": "pnpm validate", "cwd": "./packages/sub" }
+  },
+  "chains": {
+    "validate": ["format", "lint", "test", "build"],
+    "validate:full": ["format", "lint", "typecheck", "test", "docs", "build"]
+  }
+}
+`)
 }
 
 // ============================================================================
@@ -562,6 +603,9 @@ switch (command) {
 
   case "init":
     init()
+    break
+  case "config":
+    createConfig(process.argv.includes("--force") || process.argv.includes("-f"))
     break
 
   default: {
