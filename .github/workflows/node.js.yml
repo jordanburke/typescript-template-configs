@@ -34,7 +34,7 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Validate package
-        run: pnpm validate
+        run: pnpm validate:bootstrap
 
       - name: Test npm pack
         run: |
